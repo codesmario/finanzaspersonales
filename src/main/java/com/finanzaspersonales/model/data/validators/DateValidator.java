@@ -31,7 +31,7 @@ public final class DateValidator extends Validator {
 
     boolean yearValid = this.validateYear(year);
     boolean monthValid = this.validateMonth(month);
-    boolean dayValid = this.validateDay(year, month, day);
+    boolean dayValid = yearValid && monthValid && this.validateDay(year, month, day);
 
     this.isValid = yearValid && monthValid && dayValid;
 
