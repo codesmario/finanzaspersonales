@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class TransactionAmountValidatorTest {
+class TransactionAmountValidatorTest extends ValidatorTestBase {
   TransactionAmountValidator amountValidator;
 
   @BeforeEach
@@ -16,7 +16,7 @@ class TransactionAmountValidatorTest {
   @DisplayName("Amount is less than zero.")
   void validateNegativeAmount() {
     amountValidator.validate(-1000);
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         amountValidator,
         "Amount value must be greater than zero.",
         false);
@@ -26,7 +26,7 @@ class TransactionAmountValidatorTest {
   @DisplayName("Amount is zero.")
   void validateZeroAmount() {
     amountValidator.validate(0);
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         amountValidator,
         "Amount value must be greater than zero.",
         false);
@@ -36,7 +36,7 @@ class TransactionAmountValidatorTest {
   @DisplayName("Amount is more than zero and correct.")
   void validateAmount() {
     amountValidator.validate(2000);
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         amountValidator,
         "",
         true);

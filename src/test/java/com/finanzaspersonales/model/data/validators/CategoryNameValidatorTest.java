@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CategoryNameValidatorTest {
+class CategoryNameValidatorTest extends ValidatorTestBase {
   private CategoryNameValidator nameValidator;
 
   @BeforeEach
@@ -16,7 +16,7 @@ class CategoryNameValidatorTest {
   @DisplayName("Null name")
   void validateNullName() {
     nameValidator.validate(null);
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         nameValidator,
         "Name can not be null.",
         false);
@@ -26,7 +26,7 @@ class CategoryNameValidatorTest {
   @DisplayName("Empty name")
   void validateEmptyName() {
     nameValidator.validate("");
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         nameValidator,
         "Name can not be empty.",
         false);
@@ -36,7 +36,7 @@ class CategoryNameValidatorTest {
   @DisplayName("Existing name")
   void validateNameExists() {
     nameValidator.validate("Comida");
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         nameValidator,
         "Category name already exists. Input a unique name.",
         false);
@@ -46,10 +46,9 @@ class CategoryNameValidatorTest {
   @DisplayName("Correct name")
   void validateCorrectName() {
     nameValidator.validate("Entertainment");
-    ValidatorTestHelper.assertValidator(
+    assertValidatorResult(
         nameValidator,
         "",
         true);
   }
-
 }
