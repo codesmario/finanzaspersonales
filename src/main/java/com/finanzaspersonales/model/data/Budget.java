@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.YearMonth;
-import java.time.ZoneId;
-import java.time.temporal.WeekFields;
 
 /**
  * Represents a budget with a monthly total.
@@ -35,8 +33,7 @@ public class Budget {
    * @return Weekly budget.
    */
   public double getWeeklyTotal() {
-    YearMonth currentYearMonth = YearMonth.now(ZoneId.systemDefault());
-    int weeksInMonth = currentYearMonth.atEndOfMonth().get(WeekFields.ISO.weekOfMonth());
+    int weeksInMonth = DateHelper.monthWeeks(YearMonth.now());
 
     return monthlyTotal / weeksInMonth;
   }
@@ -47,7 +44,7 @@ public class Budget {
    * @return Daily budget.
    */
   public double getDailyTotal() {
-    return monthlyTotal / YearMonth.now().lengthOfMonth();
+    return monthlyTotal / DateHelper.currentMonthLength();
   }
 
   /**
