@@ -1,29 +1,31 @@
 package com.finanzaspersonales.model.exporter;
 
-import com.finanzaspersonales.model.exporter.ExportExcel;
-
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+class ExportExcelTest {
+    private ExportExcel exportExcel;
 
-public class ExportExcelTest {
+    @BeforeEach
+    void setup() {
+        exportExcel = new ExportExcel();
+    }
 
     @Test
     @DisplayName("Check - Creating file")
-    public void exportYearFilenameTest() {
-        ExportExcel exportExcel = new ExportExcel();
+    void exportYearFilenameTest() {
         Assertions.assertDoesNotThrow(()-> {
-            exportExcel.exportYear("testName",2020);
+            exportExcel.exportYear("testName.xls",2020);
         });
     }
 
     @Test
     @DisplayName("Check - Null or filename has no name")
-    public void exportYearNullNameTest() {
-        ExportExcel exportExcel = new ExportExcel();
+    void exportYearNullNameTest() {
         Assertions.assertDoesNotThrow(()-> {
             String filename = LocalDate.now() + ".xls";
             exportExcel.exportYear(filename,2020);
