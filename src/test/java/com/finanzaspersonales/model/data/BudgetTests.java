@@ -56,4 +56,21 @@ class BudgetTests {
         budget.getWeeklyTotal(),
         "The weekly amount must be the monthly total divided by the numbers of weeks.");
   }
+
+  @Test
+  @DisplayName("Budget enabled")
+  void testEnabled() {
+    Assertions.assertTrue(
+        budget.isEnabled(),
+        "The budget must be enabled when the amount is greater than zero.");
+  }
+
+  @Test
+  @DisplayName("Budget disabled")
+  void testDisabled() {
+    budget.setMonthlyTotal(0);
+    Assertions.assertFalse(
+        budget.isEnabled(),
+        "The budget must be disabled when the amount is less than zero.");
+  }
 }
